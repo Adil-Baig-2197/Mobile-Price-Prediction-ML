@@ -1,14 +1,10 @@
 services:
   - type: web
-    name: smartprice-app
+    name: smartprice-api
     env: python
-    buildCommand: pip install -r requirements.txt && cd frontend && npm install && npm run build && cd ..
-    startCommand: python run_backend.py
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     plan: free
     envVars:
-      - key: PORT
-        value: 10000
       - key: PYTHON_VERSION
-        value: 3.11.9
-      - key: NODE_VERSION
-        value: 20.10.0
+        value: 3.11.11
